@@ -27,9 +27,11 @@ old low-code/no-code framing entirely — it is never used as a category or labe
 
 ## 2. Narrative (single page, 7 scroll beats)
 
-1. **Genesis (hero)** — black brand stage. Seedance cinematic clip of a butterfly coalescing
-   from glowing brand-color particles, fluttering, then cross-dissolving into the **live three.js
-   butterfly**. Headline resolves: *"The Agentic OS for Business."* Primary CTA. Cursor-reactive.
+1. **Genesis (hero)** — black brand stage. Brand-colored **ribbons of light** (blue-led, with
+   magenta/orange/green) stream in and **trace a butterfly flight path**, fluttering and settling
+   into an implied butterfly silhouette. The assembly doubles as the **preloader**; on completion
+   the headline resolves: *"The Agentic OS for Business."* Ribbons are **cursor-magnetic**
+   (mouse-follow) and react to scroll. No video — fully real-time WebGL. Primary CTA.
 2. **The old way** — four disconnected fragments drift apart (visual nod to today's fragmentation). Tension.
 3. **Metamorphosis** — scroll fuses the fragments into the butterfly. *"Four wings. One flight."*
 4. **The four wings (interactive)** — hover/tap each wing; camera focuses, copy reveals:
@@ -37,31 +39,42 @@ old low-code/no-code framing entirely — it is never used as a category or labe
    - Blue — **Automate** (processes & operations)
    - Orange — **Agents** (AI agents that act)
    - Green — **Govern** (security & control)
-5. **Proof** — animated counters: 50+ Fortune 500 · 160+ countries · 1M+ users. Customer logos.
-6. **Agentic, but governed** — trust beat: agents that act *securely*. Answers the enterprise objection.
-7. **Take flight (CTA)** — butterfly lifts off → book-a-demo link.
+5. **Proof / platform** — a glowing brand-recolored globe + a live product-dashboard mockup
+   (Finlytic DNA) behind animated counters: 50+ Fortune 500 · 160+ countries · 1M+ users. Logos.
+6. **Agentic, but governed** — trust beat: liquid-3D forms (Guardnet DNA), agents that act
+   *securely*. Answers the enterprise objection.
+7. **Take flight (CTA)** — ribbons lift off into the butterfly → book-a-demo link.
+
+### Visual DNA (from motionsites.ai audit, recolored to Kissflow brand)
+- **Hero ribbons** = blend of *Digitwist AI Builder* (deep blue depth, "Build Faster / AI agent")
+  + *Synapse Dark Hero* (light-streak ribbons on black).
+- **Platform/proof** = *Finlytic AI Agent* (globe + dashboard).
+- **Govern** = *Guardnet* (liquid-metal 3D).
 
 ---
 
-## 3. The butterfly system (hybrid)
+## 3. The butterfly system (real-time, no video)
 
-### Intro — Seedance video
-- I author a production-ready Seedance prompt. User generates the clip externally and hands the
-  file back.
-- I conform it with **`/video-use`**: trim, color-match to exact brand hex, 16:9, clean loop point.
-- Titles / framing motion-graphics via **`/hyperframes`** (HTML → video) where needed.
+The butterfly is **implied through motion**, not a literal mesh or a pre-rendered clip — ribbons of
+brand-colored light flutter along a butterfly flight path. This is the out-of-the-box, interactive,
+image/shader-driven approach (no Seedance, no video files).
 
-### Live — three.js procedural butterfly
-- Two wing meshes echoing the 4-petal mark **as a creature** — deliberately distinct from the
-  locked logo (brand law: the logo mark may not be rotated/recolored/distorted).
-- GLSL vertex shader: wing-flap (sine) + flight-bob. Mouse parallax. Scroll-driven camera +
-  wing-spread. Brand-color particle trail. UnrealBloom on black stage.
+### Hero ribbon system (three.js)
+- GPU ribbon/curve geometry (or instanced particles along Bézier flight paths) in the four brand
+  colors, blue-led. Flutter via a GLSL vertex shader (layered sines). UnrealBloom on black stage.
+- **Cursor-magnetic:** ribbons bend toward the pointer (mouse-follow / magnetic effect, per the
+  motionsites technique).
+- **Scroll-driven:** ribbons spread, re-form, and lift across the 7 beats (GSAP ScrollTrigger).
+- **Preloader:** the on-load assembly of the ribbons into the butterfly silhouette *is* the loader;
+  fade to content on completion.
 
-### Handoff
-- Seedance clip plays on a fullscreen plane, cross-dissolves to the WebGL butterfly at a matched pose.
+### Brand-law note
+The locked logo mark (butterfly + wordmark) is never rotated, recolored, or distorted — it appears
+only in nav/footer. The hero is an *expressive light-form inspired by* the mark, kept distinct.
 
 ### Fallback
-- `prefers-reduced-motion` or low-power/no-WebGL → the brand's static black-butterfly hero image.
+- `prefers-reduced-motion` or low-power/no-WebGL → the brand's static black-butterfly hero image
+  with a subtle CSS gradient drift.
 
 ---
 
@@ -74,12 +87,13 @@ old low-code/no-code framing entirely — it is never used as a category or labe
 | Module | Responsibility | Depends on |
 |---|---|---|
 | `brand/` | Design tokens (color, type, spacing) — single source of truth | — |
-| `butterfly/geometry.ts` | Wing mesh construction | three.js |
-| `butterfly/shader/` | GLSL flutter (vertex) + brand-tint (fragment) | — |
-| `butterfly/controller.ts` | State: idle, cursor-track, scroll-spread, take-off | geometry, shader |
-| `video/intro.ts` | Seedance plane + cross-dissolve handoff to WebGL | controller |
+| `ribbons/geometry.ts` | Ribbon/curve geometry along butterfly flight paths | three.js |
+| `ribbons/shader/` | GLSL flutter (vertex) + brand-tint + bloom (fragment) | — |
+| `ribbons/controller.ts` | State: assemble, idle-flutter, cursor-magnetic, scroll-spread, lift-off | geometry, shader |
+| `preloader/` | Ribbon-assembly loader → fade to content | controller |
+| `interactions/magnetic.ts` | Pointer-follow magnetic effect (ribbons + CTAs) | — |
 | `scroll/timeline.ts` | ScrollTrigger choreography across the 7 beats | controller, sections |
-| `sections/*` | DOM content per beat (copy, counters, wing UI) | brand |
+| `sections/*` | DOM content per beat (copy, counters, wing UI, globe/dashboard, liquid-3D) | brand |
 | `main.ts` | Compose: renderer, scene, loop, fallback gate | all |
 
 Static deploy. Runs locally with one command (`npm run dev`).
@@ -107,18 +121,20 @@ no buzzword soup, no four-way positioning.
 ## 7. Build orchestration (Workflow)
 
 After this spec + the implementation plan are approved, the build runs as a **Workflow**:
-parallel stages — brand tokens · butterfly geometry+shader · scroll system · section content ·
-eos copy · video integration — then an adversarial verify/review pass, then assembly. User stays
-in the loop between phases.
+parallel stages — brand tokens · ribbon geometry+shader · magnetic interactions + preloader ·
+scroll system · section content (globe/dashboard, liquid-3D) · eos copy — then an adversarial
+verify/review pass, then assembly. User stays in the loop between phases.
+`/hyperframes` is optional and used only if any stat sequence is better rendered as a motion
+graphic; the page itself ships as live, interactive WebGL.
 
 ---
 
 ## 8. Success criteria
 
-- 60fps butterfly on a mid-tier laptop.
-- Seamless Seedance → WebGL handoff.
+- 60fps ribbon hero on a mid-tier laptop.
+- Hero ribbons assemble (preloader) → flutter → respond to cursor (magnetic) and scroll.
 - Brand-exact colors and type; logo law respected.
-- Lands exactly one category: Agentic OS.
+- Lands exactly one category: Agentic OS (no low/no-code, no video).
 - `prefers-reduced-motion` / no-WebGL fallback works.
 - Runs locally with a single command.
 
@@ -133,6 +149,7 @@ Pure concept landing page.
 
 ## 10. Open dependencies
 
-- **Seedance clip** — user-generated from the prompt I provide; build proceeds with a placeholder
-  video until delivered.
 - **Graphik license** — deferred; Inter Tight used meanwhile.
+- **Optional AI section imagery** — if the user later supplies Higgsfield/AI-generated 3D images
+  for the globe/dashboard or liquid-3D beats, they drop in; otherwise those beats ship code-driven.
+- No video / Seedance dependency.
