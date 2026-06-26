@@ -62,14 +62,9 @@ export function initTimeline(
     onUpdate: (self) => controller.setScroll(self.progress),
   });
 
-  // 2. Pin the hero while the assembled butterfly holds frame.
-  ScrollTrigger.create({
-    trigger: refs.hero,
-    start: 'top top',
-    end: 'bottom top',
-    pin: true,
-    pinSpacing: false,
-  });
+  // 2. The ribbon butterfly lives on the fixed #stage canvas, so it already
+  // persists behind every section as you scroll — no DOM pin needed. (Pinning
+  // the hero with pinSpacing:false collapsed the flow and stacked the sections.)
 
   // 3. Fuse the scattered fragments into the form at the metamorphosis beat.
   // Prefer explicit `.kf-fragment` shards, then the inner content blocks, then
