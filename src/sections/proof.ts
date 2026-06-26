@@ -1,15 +1,23 @@
 import { COPY } from './copy';
-import { mountGlobe } from './visuals/globe';
+import { mountConstellation } from './visuals/constellation';
 import { mountDashboard } from './visuals/dashboard';
+
+/** Customer marks pulled from kissflow.com, shown as an ambient grid. */
+const CUSTOMERS = [
+  { src: '/brand/customers/acko.svg', alt: 'Acko' },
+  { src: '/brand/customers/caratlane.svg', alt: 'CaratLane' },
+  { src: '/brand/customers/puma.webp', alt: 'Puma' },
+  { src: '/brand/customers/swiggy.png', alt: 'Swiggy' },
+  { src: '/brand/customers/flipkart.svg', alt: 'Flipkart' },
+  { src: '/brand/customers/sn_aboitiz.webp', alt: 'SN Aboitiz' },
+];
 
 /**
  * Beat 5 — Proof.
  *
- * Hard numbers: 50+ Fortune 500 · 160+ countries · 1M+ users, alongside the
- * Finlytic "global reach" globe and the live "Agent activity" dashboard
- * (Task 8). This module owns the copy, the stat layout, and mounting the two
- * visuals; each visual self-guards reduced-motion and accepts an `imageUrl` to
- * swap in user-supplied art later.
+ * Hard numbers + the live agent constellation, closed by an ambient customer
+ * grid: real marks that breathe in and out on a faint lattice, each lighting to
+ * full color on hover. The portfolio reads as atmosphere, not a static strip.
  */
 export function mountProof(): HTMLElement {
   const section = document.createElement('section');
@@ -36,62 +44,58 @@ export function mountProof(): HTMLElement {
 
   const stats = document.createElement('div');
   stats.className = 'kf-proof__stats';
-
   COPY.proof.stats.forEach((stat) => {
     const cell = document.createElement('div');
     cell.className = 'kf-stat';
-
     const value = document.createElement('p');
     value.className = 'kf-stat__value';
     value.textContent = stat.value;
-
     const label = document.createElement('p');
     label.className = 'kf-stat__label';
     label.textContent = stat.label;
-
     cell.append(value, label);
     stats.append(cell);
   });
 
-  // Trusted-by strip: real customer marks pulled from kissflow.com.
-  const trusted = document.createElement('div');
-  trusted.className = 'kf-proof__trusted';
-  const trustedLabel = document.createElement('p');
-  trustedLabel.className = 'kf-proof__trusted-label';
-  trustedLabel.textContent = 'Trusted by enterprise teams worldwide';
-  const logos = document.createElement('div');
-  logos.className = 'kf-proof__logos';
-  [
-    { src: '/brand/customers/puma.webp', alt: 'Puma Energy' },
-    { src: '/brand/customers/sn_aboitiz.webp', alt: 'SN Aboitiz Power' },
-  ].forEach(({ src, alt }) => {
-    const img = document.createElement('img');
-    img.className = 'kf-proof__logo';
-    img.src = src;
-    img.alt = alt;
-    img.setAttribute('onerror', "this.style.display='none'");
-    logos.append(img);
-  });
-  trusted.append(trustedLabel, logos);
+  copyCol.append(eyebrow, headline, stats);
 
-  copyCol.append(eyebrow, headline, stats, trusted);
-
-  // Visual column: dotted brand globe behind the Agent-activity dashboard.
   const visualCol = document.createElement('div');
   visualCol.className = 'kf-proof__visual';
-
-  const globeEl = document.createElement('div');
-  globeEl.className = 'kf-visual kf-proof__globe';
-
+  const constellationEl = document.createElement('div');
+  constellationEl.className = 'kf-visual kf-proof__globe';
   const dashboardEl = document.createElement('div');
   dashboardEl.className = 'kf-proof__dashboard';
+  visualCol.append(constellationEl, dashboardEl);
 
-  visualCol.append(globeEl, dashboardEl);
   layout.append(copyCol, visualCol);
-  inner.append(layout);
+
+  // Ambient customer grid — a faint lattice of marks that breathe in sequence.
+  const portfolio = document.createElement('div');
+  portfolio.className = 'kf-portfolio';
+  const portfolioLabel = document.createElement('p');
+  portfolioLabel.className = 'kf-portfolio__label';
+  portfolioLabel.textContent = 'Trusted by forward-thinking enterprises';
+  const grid = document.createElement('div');
+  grid.className = 'kf-portfolio__grid';
+  CUSTOMERS.forEach(({ src, alt }, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'kf-portfolio__cell';
+    cell.style.setProperty('--i', String(i));
+    const img = document.createElement('img');
+    img.className = 'kf-portfolio__logo';
+    img.src = src;
+    img.alt = alt;
+    img.loading = 'lazy';
+    img.setAttribute('onerror', "this.closest('.kf-portfolio__cell').style.display='none'");
+    cell.append(img);
+    grid.append(cell);
+  });
+  portfolio.append(portfolioLabel, grid);
+
+  inner.append(layout, portfolio);
   section.append(inner);
 
-  mountGlobe(globeEl, { imageUrl: '/brand/art/proof-globe.png' });
+  mountConstellation(constellationEl);
   mountDashboard(dashboardEl);
 
   return section;

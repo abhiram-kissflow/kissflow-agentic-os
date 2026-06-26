@@ -1,5 +1,5 @@
 import { COPY } from './copy';
-import { mountLiquid } from './visuals/liquid';
+import { mountCage } from './visuals/cage';
 
 /**
  * Beat 6 — Govern.
@@ -44,7 +44,7 @@ export function mountGovern(): HTMLElement {
   inner.append(layout);
   section.append(inner);
 
-  mountLiquid(visualCol, { imageUrl: '/brand/art/govern-liquid.png' });
+  mountCage(visualCol);
 
   return section;
 }

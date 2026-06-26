@@ -717,3 +717,65 @@
   margin: 0;
   max-width: 46ch;
 }
+
+/* Ambient customer portfolio grid: a faint lattice of marks that breathe in
+   sequence and light to full color on hover. */
+.kf-portfolio {
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+.kf-portfolio__label {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kf-muted);
+  margin: 0 0 1.75rem;
+}
+.kf-portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--kf-line);
+  border: 1px solid var(--kf-line);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.kf-portfolio__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(96px, 12vw, 132px);
+  padding: 1.5rem;
+  background: var(--kf-black);
+  transition: background 0.4s ease;
+}
+.kf-portfolio__logo {
+  max-width: 78%;
+  max-height: 38px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Marks render in mono white, breathing on a stagger; hover restores color. */
+  filter: brightness(0) invert(1);
+  opacity: 0.34;
+  animation: kf-breathe 5.5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.65s);
+  transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+.kf-portfolio__cell:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.kf-portfolio__cell:hover .kf-portfolio__logo {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.04);
+  animation-play-state: paused;
+}
+@keyframes kf-breathe {
+  0%, 100% { opacity: 0.28; }
+  50% { opacity: 0.62; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kf-portfolio__logo { animation: none; opacity: 0.5; }
+}
