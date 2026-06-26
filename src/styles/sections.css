@@ -13,7 +13,7 @@
   --kf-green: #4aa147;
   --kf-black: #000000;
   --kf-ink: #ffffff;
-  --kf-muted: rgba(255, 255, 255, 0.62);
+  --kf-muted: rgba(255, 255, 255, 0.74);
   --kf-line: rgba(255, 255, 255, 0.12);
 }
 
@@ -81,8 +81,34 @@
   text-align: center;
 }
 
+/* Legibility scrim: a soft radial darkening behind the hero copy so the
+   words stay readable over the live ribbon field without hiding it. */
+.kf-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 58% 46% at 50% 48%,
+    rgba(0, 0, 0, 0.78),
+    rgba(0, 0, 0, 0.45) 52%,
+    transparent 78%
+  );
+}
+
+.kf-hero .kf-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .kf-hero .kf-headline {
-  font-size: clamp(2.8rem, 9vw, 7.5rem);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.6);
+}
+
+.kf-hero .kf-body {
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .kf-hero .kf-body {
@@ -531,4 +557,52 @@
   .kf-cta-button {
     transition: none;
   }
+}
+
+/* Metamorphosis backdrop: particle-butterfly art behind the copy. */
+.kf-metamorphosis {
+  position: relative;
+  overflow: hidden;
+}
+.kf-metamorphosis__backdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(1100px, 96vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 80%);
+}
+.kf-metamorphosis .kf-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Trusted-by customer strip in the proof beat. */
+.kf-proof__trusted {
+  margin-top: 2.5rem;
+}
+.kf-proof__trusted-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kf-muted, rgba(255, 255, 255, 0.6));
+  margin: 0 0 1rem;
+}
+.kf-proof__logos {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.kf-proof__logo {
+  height: 2rem;
+  width: auto;
+  opacity: 0.85;
+  filter: brightness(0) invert(1);
 }

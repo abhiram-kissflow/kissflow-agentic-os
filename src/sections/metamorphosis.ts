@@ -12,6 +12,15 @@ export function mountMetamorphosis(): HTMLElement {
   section.className = 'kf-section kf-metamorphosis';
   section.dataset.beat = 'metamorphosis';
 
+  // Particle-butterfly backdrop (AI art) sits behind the copy on the black stage.
+  const backdrop = document.createElement('img');
+  backdrop.className = 'kf-metamorphosis__backdrop';
+  backdrop.src = '/brand/art/metamorphosis.png';
+  backdrop.alt = '';
+  backdrop.setAttribute('aria-hidden', 'true');
+  backdrop.setAttribute('onerror', "this.style.display='none'");
+  section.append(backdrop);
+
   const inner = document.createElement('div');
   inner.className = 'kf-section__inner';
 

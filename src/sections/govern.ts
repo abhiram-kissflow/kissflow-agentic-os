@@ -44,7 +44,7 @@ export function mountGovern(): HTMLElement {
   inner.append(layout);
   section.append(inner);
 
-  mountLiquid(visualCol);
+  mountLiquid(visualCol, { imageUrl: '/brand/art/govern-liquid.png' });
 
   return section;
 }

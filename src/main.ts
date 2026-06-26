@@ -31,8 +31,8 @@ function renderStaticFallback(root: HTMLElement): void {
   section.className = 'kf-fallback';
   section.innerHTML = `
     <img class="kf-fallback__mark"
-         src="/brand/hero-butterfly.png"
-         alt="Kissflow"
+         src="/brand/art/hero-bg.png"
+         alt="Kissflow — a butterfly traced in light"
          onerror="this.style.display='none'" />
     <h1 class="kf-fallback__headline">The Agentic OS for Business.</h1>
     <p class="kf-fallback__sub">Build enterprise-grade applications. Run by agents. Governed by design.</p>
@@ -46,7 +46,7 @@ function renderStaticFallback(root: HTMLElement): void {
   background:${BRAND.black}; color:#fff; padding:2rem;
   font-family:'Inter Tight',system-ui,sans-serif;
 }
-.kf-fallback__mark{ width:min(280px,60vw); height:auto; margin-bottom:2rem; }
+.kf-fallback__mark{ width:min(900px,92vw); height:auto; margin-bottom:2rem; border-radius:12px; }
 .kf-fallback__headline{ font-size:clamp(2rem,6vw,4.5rem); font-weight:700; margin:0; letter-spacing:-0.02em; }
 .kf-fallback__sub{ font-size:clamp(1rem,2vw,1.4rem); font-weight:400; opacity:.8; margin:1rem 0 0; max-width:42ch; }
 `;
@@ -93,9 +93,9 @@ function bootWebGL(stage: HTMLCanvasElement): void {
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
     new THREE.Vector2(globalThis.innerWidth, globalThis.innerHeight),
-    0.9, // strength
-    0.6, // radius
-    0.0, // threshold (everything blooms on the black stage)
+    0.38, // strength — gentle glow on the ribbon cores, not a wash
+    0.45, // radius
+    0.5, // threshold — only the brightest cores bloom, keeps copy readable
   );
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
