@@ -1,11 +1,15 @@
 import { COPY } from './copy';
+import { mountGlobe } from './visuals/globe';
+import { mountDashboard } from './visuals/dashboard';
 
 /**
  * Beat 5 — Proof.
  *
- * Hard numbers: 50+ Fortune 500 · 160+ countries · 1M+ users. Task 8 mounts
- * the Finlytic globe + dashboard visual into this beat; this module owns the
- * copy and stat layout.
+ * Hard numbers: 50+ Fortune 500 · 160+ countries · 1M+ users, alongside the
+ * Finlytic "global reach" globe and the live "Agent activity" dashboard
+ * (Task 8). This module owns the copy, the stat layout, and mounting the two
+ * visuals; each visual self-guards reduced-motion and accepts an `imageUrl` to
+ * swap in user-supplied art later.
  */
 export function mountProof(): HTMLElement {
   const section = document.createElement('section');
@@ -15,6 +19,12 @@ export function mountProof(): HTMLElement {
 
   const inner = document.createElement('div');
   inner.className = 'kf-section__inner';
+
+  const layout = document.createElement('div');
+  layout.className = 'kf-proof__layout';
+
+  const copyCol = document.createElement('div');
+  copyCol.className = 'kf-proof__copy';
 
   const eyebrow = document.createElement('p');
   eyebrow.className = 'kf-eyebrow';
@@ -43,7 +53,25 @@ export function mountProof(): HTMLElement {
     stats.append(cell);
   });
 
-  inner.append(eyebrow, headline, stats);
+  copyCol.append(eyebrow, headline, stats);
+
+  // Visual column: dotted brand globe behind the Agent-activity dashboard.
+  const visualCol = document.createElement('div');
+  visualCol.className = 'kf-proof__visual';
+
+  const globeEl = document.createElement('div');
+  globeEl.className = 'kf-visual kf-proof__globe';
+
+  const dashboardEl = document.createElement('div');
+  dashboardEl.className = 'kf-proof__dashboard';
+
+  visualCol.append(globeEl, dashboardEl);
+  layout.append(copyCol, visualCol);
+  inner.append(layout);
   section.append(inner);
+
+  mountGlobe(globeEl);
+  mountDashboard(dashboardEl);
+
   return section;
 }

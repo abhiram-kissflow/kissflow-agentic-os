@@ -181,6 +181,14 @@
 }
 
 /* Proof --------------------------------------------------------------- */
+.kf-proof__layout,
+.kf-govern__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
 .kf-proof__stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -212,6 +220,191 @@
   margin: 0.75rem 0 0;
 }
 
+/* Task 8 visuals — globe / dashboard / liquid ------------------------- */
+.kf-visual {
+  position: relative;
+  width: 100%;
+}
+
+.kf-visual__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.kf-visual__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.kf-visual__static {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--kf-line);
+}
+
+.kf-visual__static--globe {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(31, 128, 255, 0.35),
+    rgba(207, 44, 145, 0.12) 60%,
+    transparent 72%
+  );
+}
+
+.kf-visual__static--liquid {
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(245, 130, 32, 0.4),
+    rgba(31, 128, 255, 0.25) 65%,
+    transparent 80%
+  );
+}
+
+/* Proof visual stack: globe glows behind the dashboard card. */
+.kf-proof__visual {
+  position: relative;
+  min-height: clamp(20rem, 38vw, 30rem);
+}
+
+.kf-proof__globe {
+  position: absolute;
+  inset: -8% -6% auto auto;
+  width: 70%;
+  height: 100%;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.kf-proof__dashboard {
+  position: relative;
+  z-index: 1;
+}
+
+.kf-dash {
+  background: rgba(10, 10, 12, 0.72);
+  border: 1px solid var(--kf-line);
+  border-radius: 1rem;
+  padding: 1.25rem 1.4rem;
+  backdrop-filter: blur(8px);
+}
+
+.kf-dash__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.kf-dash__title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.kf-dash__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kf-green);
+}
+
+.kf-dash__live::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--kf-green);
+}
+
+.kf-dash__counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.kf-dash__counter-value {
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.kf-dash__counter-label {
+  font-size: 0.72rem;
+  color: var(--kf-muted);
+  margin: 0.25rem 0 0;
+}
+
+.kf-dash__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.kf-dash__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--kf-line);
+}
+
+.kf-dash__agent {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.kf-dash__task {
+  grid-column: 1;
+  font-size: 0.78rem;
+  color: var(--kf-muted);
+}
+
+.kf-dash__pill {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.kf-dash__pill[data-status='running'] {
+  color: var(--kf-blue);
+  background: rgba(31, 128, 255, 0.14);
+}
+.kf-dash__pill[data-status='approved'] {
+  color: var(--kf-green);
+  background: rgba(74, 161, 71, 0.16);
+}
+.kf-dash__pill[data-status='review'] {
+  color: var(--kf-orange);
+  background: rgba(245, 130, 32, 0.16);
+}
+.kf-dash__pill[data-status='flagged'] {
+  color: var(--kf-magenta);
+  background: rgba(207, 44, 145, 0.16);
+}
+
+/* Govern liquid-metal visual. */
+.kf-govern__visual {
+  min-height: clamp(20rem, 40vw, 32rem);
+  height: 100%;
+}
+
 /* CTA close ----------------------------------------------------------- */
 .kf-cta {
   align-items: center;
@@ -223,11 +416,26 @@
   margin-right: auto;
 }
 
+@media (max-width: 900px) {
+  .kf-proof__layout,
+  .kf-govern__layout {
+    grid-template-columns: 1fr;
+  }
+  .kf-proof__globe {
+    inset: 0 0 auto auto;
+    width: 100%;
+    opacity: 0.4;
+  }
+}
+
 @media (max-width: 640px) {
   .kf-wings__grid {
     grid-template-columns: 1fr;
   }
   .kf-proof__stats {
+    grid-template-columns: 1fr;
+  }
+  .kf-dash__counters {
     grid-template-columns: 1fr;
   }
 }
