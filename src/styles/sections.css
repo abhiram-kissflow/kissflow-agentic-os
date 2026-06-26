@@ -1,0 +1,239 @@
+/*
+ * Section beats — DOM choreography over the WebGL stage.
+ *
+ * Black stage, white type, big Inter Tight. Sections sit above the fixed
+ * canvas (#stage) and scroll; the ribbon hero shows through the transparent
+ * gaps. Layout is intentionally generous so the light-form has room to fly.
+ */
+
+:root {
+  --kf-blue: #1f80ff;
+  --kf-magenta: #cf2c91;
+  --kf-orange: #f58220;
+  --kf-green: #4aa147;
+  --kf-black: #000000;
+  --kf-ink: #ffffff;
+  --kf-muted: rgba(255, 255, 255, 0.62);
+  --kf-line: rgba(255, 255, 255, 0.12);
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: block;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+.kf-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: clamp(2rem, 8vw, 9rem);
+  color: var(--kf-ink);
+  font-family: 'Inter Tight', system-ui, sans-serif;
+}
+
+.kf-section__inner {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.kf-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kf-muted);
+  margin: 0 0 1.25rem;
+}
+
+.kf-headline {
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.kf-body {
+  font-size: clamp(1.05rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--kf-muted);
+  max-width: 44ch;
+  margin: 1.75rem 0 0;
+}
+
+/* Hero ---------------------------------------------------------------- */
+.kf-hero {
+  align-items: center;
+  text-align: center;
+}
+
+.kf-hero .kf-headline {
+  font-size: clamp(2.8rem, 9vw, 7.5rem);
+}
+
+.kf-hero .kf-body {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Buttons / CTAs ------------------------------------------------------ */
+.kf-cta-button {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 0.9rem 2.2rem;
+  border: 1px solid var(--kf-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--kf-ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  will-change: transform;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.kf-cta-button:hover {
+  background: var(--kf-ink);
+  color: var(--kf-black);
+}
+
+.kf-cta-button--primary {
+  border-color: var(--kf-blue);
+  background: var(--kf-blue);
+  color: var(--kf-ink);
+}
+
+.kf-cta-button--primary:hover {
+  background: var(--kf-ink);
+  color: var(--kf-black);
+}
+
+/* Four wings ---------------------------------------------------------- */
+.kf-wings__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 3rem;
+  background: var(--kf-line);
+  border: 1px solid var(--kf-line);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.kf-wing {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--kf-black);
+  cursor: pointer;
+  transition: background 0.35s ease;
+}
+
+.kf-wing:focus,
+.kf-wing:hover,
+.kf-wing.is-focused {
+  outline: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.kf-wing__title {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+}
+
+.kf-wing[data-wing='build'] .kf-wing__title {
+  color: var(--kf-blue);
+}
+.kf-wing[data-wing='automate'] .kf-wing__title {
+  color: var(--kf-magenta);
+}
+.kf-wing[data-wing='agents'] .kf-wing__title {
+  color: var(--kf-orange);
+}
+.kf-wing[data-wing='govern'] .kf-wing__title {
+  color: var(--kf-green);
+}
+
+.kf-wing__body {
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--kf-muted);
+  margin: 0;
+  max-width: 36ch;
+}
+
+/* Proof --------------------------------------------------------------- */
+.kf-proof__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 3.5rem;
+}
+
+.kf-stat__value {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0;
+}
+
+.kf-proof__stats .kf-stat:nth-child(1) .kf-stat__value {
+  color: var(--kf-blue);
+}
+.kf-proof__stats .kf-stat:nth-child(2) .kf-stat__value {
+  color: var(--kf-magenta);
+}
+.kf-proof__stats .kf-stat:nth-child(3) .kf-stat__value {
+  color: var(--kf-orange);
+}
+
+.kf-stat__label {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  color: var(--kf-muted);
+  margin: 0.75rem 0 0;
+}
+
+/* CTA close ----------------------------------------------------------- */
+.kf-cta {
+  align-items: center;
+  text-align: center;
+}
+
+.kf-cta .kf-body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .kf-wings__grid {
+    grid-template-columns: 1fr;
+  }
+  .kf-proof__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kf-cta-button {
+    transition: none;
+  }
+}
