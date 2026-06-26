@@ -1,4 +1,5 @@
 // src/main.ts
+import './styles/fonts.css';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -11,6 +12,8 @@ import { Preloader } from './preloader';
 import { RibbonController } from './ribbons/controller';
 import { mountSections } from './sections';
 import { initTimeline } from './scroll/timeline';
+import { mountNav } from './components/nav';
+import { mountFooter } from './components/footer';
 
 document.body.style.background = BRAND.black;
 
@@ -82,6 +85,7 @@ function bootWebGL(stage: HTMLCanvasElement): void {
   if (app) {
     const refs = mountSections(app);
     initTimeline(controller, refs);
+    mountFooter(app);
   }
 
   // Post-processing: render the scene, then bloom the additive ribbon glow.
@@ -125,8 +129,14 @@ function bootWebGL(stage: HTMLCanvasElement): void {
   console.log('Kissflow Agentic OS — stage ready');
 }
 
+// Brand chrome (locked logo) frames every path — live stage and static fallback.
+mountNav(document.body);
+
 if (!canRenderWebGL() || prefersReducedMotion()) {
-  if (app) renderStaticFallback(app);
+  if (app) {
+    renderStaticFallback(app);
+    mountFooter(app);
+  }
   console.log('Kissflow Agentic OS — static fallback');
 } else if (canvas) {
   bootWebGL(canvas);

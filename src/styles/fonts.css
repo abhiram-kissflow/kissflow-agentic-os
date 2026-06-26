@@ -1,0 +1,32 @@
+/*
+ * Typography — Inter Tight (interim brand typeface).
+ *
+ * Brand law: all type is set in Inter Tight, the open-source stand-in for the
+ * licensed Graphik used in production. Weights 400 / 500 / 600 / 700 are loaded
+ * to match the headline (700), label (600), CTA (500), and body (400) ramps.
+ *
+ * GRAPHIK SWAP PATH
+ * -----------------
+ * When the licensed Graphik webfont is available, drop the @font-face block
+ * below (self-host the .woff2 files) and remove the Google Fonts @import. The
+ * --kf-font stack already names Graphik first, so every surface picks it up
+ * automatically with Inter Tight as the fallback:
+ *
+ *   @font-face { font-family: 'Graphik'; src: url('/fonts/Graphik-Regular.woff2'); font-weight: 400; }
+ *   @font-face { font-family: 'Graphik'; src: url('/fonts/Graphik-Medium.woff2');  font-weight: 500; }
+ *   @font-face { font-family: 'Graphik'; src: url('/fonts/Graphik-Semibold.woff2');font-weight: 600; }
+ *   @font-face { font-family: 'Graphik'; src: url('/fonts/Graphik-Bold.woff2');    font-weight: 700; }
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Graphik first (production), Inter Tight as the open substitute. */
+  --kf-font: 'Graphik', 'Inter Tight', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+}
+
+html,
+body {
+  font-family: var(--kf-font);
+}
