@@ -273,16 +273,16 @@
   margin: 0 0 0.75rem;
 }
 
-.kf-wing[data-wing='build'] .kf-wing__title {
-  color: var(--kf-blue);
-}
-.kf-wing[data-wing='automate'] .kf-wing__title {
+.kf-wing[data-wing='orchestrate'] .kf-wing__title {
   color: var(--kf-magenta);
 }
-.kf-wing[data-wing='agents'] .kf-wing__title {
+.kf-wing[data-wing='reason'] .kf-wing__title {
+  color: var(--kf-blue);
+}
+.kf-wing[data-wing='act'] .kf-wing__title {
   color: var(--kf-orange);
 }
-.kf-wing[data-wing='govern'] .kf-wing__title {
+.kf-wing[data-wing='remember'] .kf-wing__title {
   color: var(--kf-green);
 }
 
@@ -606,4 +606,110 @@
   width: auto;
   opacity: 0.85;
   filter: brightness(0) invert(1);
+}
+
+/* Metamorphosis blueprint: BPM → inject → Agentic OS. */
+.kf-blueprint {
+  margin-top: 3rem;
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.kf-blueprint__node {
+  flex: 1 1 13rem;
+  min-width: 12rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--kf-line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.kf-blueprint__node--after {
+  border-color: rgba(31, 128, 255, 0.55);
+  background: linear-gradient(180deg, rgba(31, 128, 255, 0.14), rgba(207, 44, 145, 0.08));
+}
+.kf-blueprint__label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.kf-blueprint__sub {
+  font-size: 0.92rem;
+  color: var(--kf-muted);
+}
+.kf-blueprint__arrow {
+  flex: 1 1 12rem;
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+.kf-blueprint__inject {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--kf-ink);
+}
+.kf-blueprint__line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--kf-magenta), var(--kf-blue));
+  position: relative;
+  border-radius: 2px;
+}
+.kf-blueprint__line::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 8px solid var(--kf-blue);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+/* Unfair-advantage beat: numbered prose rows, no card chrome. */
+.kf-advantage__list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 52rem;
+}
+.kf-advantage__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-top: 2rem;
+  border-top: 1px solid var(--kf-line);
+}
+.kf-advantage__item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.kf-advantage__index {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--kf-blue);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+.kf-advantage__title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.01em;
+}
+.kf-advantage__desc {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--kf-muted);
+  margin: 0;
+  max-width: 46ch;
 }

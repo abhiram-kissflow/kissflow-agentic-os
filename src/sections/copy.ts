@@ -26,31 +26,56 @@ export const COPY = {
   metamorphosis: {
     eyebrow: 'The shift',
     headline: 'Four wings. One flight.',
-    body: 'Kissflow gathers the scattered pieces into one living system. Build, automate, agents, and govern move together.',
+    body: 'A platform of fixed rules and forms becomes one that reasons. Inject orchestration, memory, and language models, and structured work takes flight as an autonomous system.',
+    before: 'Traditional BPM',
+    beforeSub: 'Fixed rules & forms',
+    inject: 'Orchestration · Memory · Reasoning',
+    after: 'Agentic OS',
+    afterSub: 'Autonomous goal-seeking',
+  },
+
+  advantage: {
+    eyebrow: 'The unfair advantage',
+    headline: 'An OS needs a body. The platform already built it.',
+    body: 'A raw model can think. It cannot act safely inside an enterprise. Kissflow can — because the hard parts already exist.',
+    items: [
+      {
+        title: 'Guardrails',
+        body: 'A rules engine keeps every agent inside policy, compliance, and approval. Deterministic where it must be.',
+      },
+      {
+        title: 'Pipes',
+        body: 'Secure connectors to your ERPs, CRMs, and databases. Agents that reach real data instead of working blind.',
+      },
+      {
+        title: 'Context',
+        body: 'Schemas, roles, forms, and process maps give an agent situational awareness a bare model never has.',
+      },
+    ],
   },
 
   wings: {
-    headline: 'One platform. Four powers.',
+    headline: 'Four shifts. One operating system.',
     items: [
       {
-        key: 'build',
-        title: 'Build',
-        body: 'Compose enterprise-grade applications in days, not quarters.',
+        key: 'orchestrate',
+        title: 'Orchestrate',
+        body: 'State the goal — "onboard this supplier." The OS reasons out the steps and builds the path on the fly, instead of waiting for a fixed route.',
       },
       {
-        key: 'automate',
-        title: 'Automate',
-        body: 'Turn process into flow. Route work, approvals, and data without the busywork.',
+        key: 'reason',
+        title: 'Reason',
+        body: 'The rules engine still enforces policy. A language layer reads the unstructured contract and decides: auto-approve, or route for review.',
       },
       {
-        key: 'agents',
-        title: 'Agents',
-        body: 'Put AI agents to work inside your processes, acting with context and judgment.',
+        key: 'act',
+        title: 'Act',
+        body: 'Forms and APIs become agent tools. What a person filled in by hand, an agent now reads, writes, and runs end to end.',
       },
       {
-        key: 'govern',
-        title: 'Govern',
-        body: 'Hold control as you scale. Roles, policy, and audit live in the core.',
+        key: 'remember',
+        title: 'Remember',
+        body: 'A semantic memory recalls how the last dispute or bottleneck was resolved — months later, in full context.',
       },
     ],
   },
@@ -67,8 +92,8 @@ export const COPY = {
 
   govern: {
     eyebrow: 'Govern',
-    headline: 'Autonomy you can answer for.',
-    body: 'Every agent acts inside guardrails you set. Permissions, policy, and a full audit trail — so speed never costs you control.',
+    headline: 'Deterministic where it matters. Agentic where it pays.',
+    body: 'Finance, payroll, and compliance run on rules you can audit. Support routing, data extraction, and exceptions run on agents. One system — secure by design, autonomous where it counts.',
   },
 
   cta: {

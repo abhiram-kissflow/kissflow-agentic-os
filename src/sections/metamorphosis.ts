@@ -36,7 +36,25 @@ export function mountMetamorphosis(): HTMLElement {
   body.className = 'kf-body';
   body.textContent = COPY.metamorphosis.body;
 
-  inner.append(eyebrow, headline, body);
+  // The transformation blueprint: [Traditional BPM] → inject → [Agentic OS].
+  const blueprint = document.createElement('div');
+  blueprint.className = 'kf-blueprint';
+  blueprint.innerHTML = `
+    <div class="kf-blueprint__node kf-blueprint__node--before">
+      <span class="kf-blueprint__label">${COPY.metamorphosis.before}</span>
+      <span class="kf-blueprint__sub">${COPY.metamorphosis.beforeSub}</span>
+    </div>
+    <div class="kf-blueprint__arrow">
+      <span class="kf-blueprint__inject">${COPY.metamorphosis.inject}</span>
+      <span class="kf-blueprint__line" aria-hidden="true"></span>
+    </div>
+    <div class="kf-blueprint__node kf-blueprint__node--after">
+      <span class="kf-blueprint__label">${COPY.metamorphosis.after}</span>
+      <span class="kf-blueprint__sub">${COPY.metamorphosis.afterSub}</span>
+    </div>
+  `;
+
+  inner.append(eyebrow, headline, body, blueprint);
   section.append(inner);
   return section;
 }

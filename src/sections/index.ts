@@ -3,6 +3,7 @@ import '../styles/sections.css';
 import { mountHero } from './hero';
 import { mountOldway } from './oldway';
 import { mountMetamorphosis } from './metamorphosis';
+import { mountAdvantage } from './advantage';
 import { mountWings } from './wings';
 import { mountProof } from './proof';
 import { mountGovern } from './govern';
@@ -21,6 +22,7 @@ export interface SectionRefs {
   hero: HTMLElement;
   oldway: HTMLElement;
   metamorphosis: HTMLElement;
+  advantage: HTMLElement;
   wings: HTMLElement;
   proof: HTMLElement;
   govern: HTMLElement;
@@ -36,6 +38,7 @@ export function mountSections(root: HTMLElement): SectionRefs {
   const hero = mountHero();
   const oldway = mountOldway();
   const metamorphosis = mountMetamorphosis();
+  const advantage = mountAdvantage();
   const wings = mountWings();
   const proof = mountProof();
   const govern = mountGovern();
@@ -45,6 +48,7 @@ export function mountSections(root: HTMLElement): SectionRefs {
     hero,
     oldway,
     metamorphosis,
+    advantage,
     wings.section,
     proof,
     govern,
@@ -55,6 +59,7 @@ export function mountSections(root: HTMLElement): SectionRefs {
     hero,
     oldway,
     metamorphosis,
+    advantage,
     wings: wings.section,
     proof,
     govern,

@@ -75,23 +75,28 @@ export function initTimeline(
     ),
   );
   const fuseTargets = fragments.length > 0 ? fragments : [refs.metamorphosis];
-  gsap.fromTo(
-    fuseTargets,
-    { opacity: 0, y: 48, filter: 'blur(8px)' },
-    {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      stagger: 0.08,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: refs.metamorphosis,
-        start: 'top 80%',
-        end: 'center center',
-        scrub: true,
+  // Reveal as enhancement only — content stays visible by default (no opacity
+  // gate), so it never ships blank on a headless render or a tab that never
+  // scrolls. The scrub just clears a subtle offset + blur as the beat arrives.
+  const reduce = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    gsap.fromTo(
+      fuseTargets,
+      { y: 36, filter: 'blur(6px)' },
+      {
+        y: 0,
+        filter: 'blur(0px)',
+        stagger: 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: refs.metamorphosis,
+          start: 'top 80%',
+          end: 'center center',
+          scrub: true,
+        },
       },
-    },
-  );
+    );
+  }
 
   // 4. Focus a ribbon lobe when a wing card is hovered or focused.
   refs.wings.addEventListener('wing:focus', (event) => {
