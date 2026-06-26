@@ -1,9 +1,14 @@
 // src/main.ts
 import * as THREE from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { BRAND } from './brand/tokens';
 import { canRenderWebGL, prefersReducedMotion } from './capability';
 import { createRenderer } from './renderer';
 import { Preloader } from './preloader';
+import { RibbonController } from './ribbons/controller';
 
 document.body.style.background = BRAND.black;
 
@@ -45,9 +50,12 @@ function renderStaticFallback(root: HTMLElement): void {
 }
 
 /**
- * Boot the real-time WebGL stage: renderer + preloader. The ribbon hero
- * (Tasks 3–4) signals ready; for now we resolve the preloader once the
- * renderer has drawn its first black frame.
+ * Boot the real-time WebGL stage: renderer + bloom composer + ribbon hero.
+ *
+ * The ribbon controller drives the butterfly shader; an UnrealBloomPass on the
+ * black stage turns the additive ribbon glow into soft light. On boot we run
+ * `controller.assemble()` (knot → butterfly) and resolve the preloader once the
+ * form has finished blooming.
  */
 function bootWebGL(stage: HTMLCanvasElement): void {
   const preloader = new Preloader();
@@ -64,16 +72,46 @@ function bootWebGL(stage: HTMLCanvasElement): void {
   );
   camera.position.z = 5;
 
-  let ready = false;
+  const controller = new RibbonController();
+  scene.add(controller.mesh);
+
+  // Post-processing: render the scene, then bloom the additive ribbon glow.
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(
+    new THREE.Vector2(globalThis.innerWidth, globalThis.innerHeight),
+    0.9, // strength
+    0.6, // radius
+    0.0, // threshold (everything blooms on the black stage)
+  );
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
+
+  const setComposerSize = (): void => {
+    composer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+    camera.aspect = globalThis.innerWidth / globalThis.innerHeight;
+    camera.updateProjectionMatrix();
+  };
+  setComposerSize();
+  globalThis.addEventListener('resize', setComposerSize);
+
+  // Cursor-magnetic pointer in stage space (~-2.5..2.5 across the viewport).
+  globalThis.addEventListener('pointermove', (e) => {
+    const nx = (e.clientX / globalThis.innerWidth) * 2 - 1;
+    const ny = -((e.clientY / globalThis.innerHeight) * 2 - 1);
+    controller.setPointer(nx * 2.5, ny * 2.5);
+  });
+
+  const clock = new THREE.Clock();
   const tick = (): void => {
-    renderer.render(scene, camera);
-    if (!ready) {
-      ready = true;
-      void preloader.done();
-    }
+    controller.update(clock.getDelta());
+    composer.render();
     globalThis.requestAnimationFrame(tick);
   };
   globalThis.requestAnimationFrame(tick);
+
+  // Bloom the butterfly into view, then dismiss the preloader.
+  void controller.assemble().then(() => preloader.done());
 
   console.log('Kissflow Agentic OS — stage ready');
 }
