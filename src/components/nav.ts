@@ -1,4 +1,5 @@
 import { magnetize } from '../interactions/magnetic';
+import { asset } from '../asset';
 
 /**
  * Top navigation chrome.
@@ -25,7 +26,7 @@ export function mountNav(root: HTMLElement): HTMLElement {
 
   const logo = document.createElement('img');
   logo.className = 'kf-nav__logo';
-  logo.src = '/brand/kissflow-horizontal-white.png';
+  logo.src = asset('/brand/kissflow-horizontal-white.png');
   logo.alt = 'Kissflow';
   logo.width = 132;
   logo.height = 32;

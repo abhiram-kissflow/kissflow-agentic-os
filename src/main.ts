@@ -6,6 +6,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { BRAND } from './brand/tokens';
+import { asset } from './asset';
 import { canRenderWebGL, prefersReducedMotion } from './capability';
 import { createRenderer } from './renderer';
 import { Preloader } from './preloader';
@@ -31,7 +32,7 @@ function renderStaticFallback(root: HTMLElement): void {
   section.className = 'kf-fallback';
   section.innerHTML = `
     <img class="kf-fallback__mark"
-         src="/brand/art/hero-bg.png"
+         src="${asset('/brand/art/hero-bg.png')}"
          alt="Kissflow — a butterfly traced in light"
          onerror="this.style.display='none'" />
     <h1 class="kf-fallback__headline">The Agentic OS for Business.</h1>

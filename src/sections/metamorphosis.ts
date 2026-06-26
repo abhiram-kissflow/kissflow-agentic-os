@@ -1,4 +1,5 @@
 import { COPY } from './copy';
+import { asset } from '../asset';
 
 /**
  * Beat 3 — Metamorphosis.
@@ -15,7 +16,7 @@ export function mountMetamorphosis(): HTMLElement {
   // Particle-butterfly backdrop (AI art) sits behind the copy on the black stage.
   const backdrop = document.createElement('img');
   backdrop.className = 'kf-metamorphosis__backdrop';
-  backdrop.src = '/brand/art/metamorphosis.png';
+  backdrop.src = asset('/brand/art/metamorphosis.png');
   backdrop.alt = '';
   backdrop.setAttribute('aria-hidden', 'true');
   backdrop.setAttribute('onerror', "this.style.display='none'");

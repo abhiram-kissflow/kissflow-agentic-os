@@ -1,15 +1,16 @@
 import { COPY } from './copy';
+import { asset } from '../asset';
 import { mountConstellation } from './visuals/constellation';
 import { mountDashboard } from './visuals/dashboard';
 
 /** Customer marks pulled from kissflow.com, shown as an ambient grid. */
 const CUSTOMERS = [
-  { src: '/brand/customers/acko.svg', alt: 'Acko' },
-  { src: '/brand/customers/caratlane.svg', alt: 'CaratLane' },
-  { src: '/brand/customers/puma.webp', alt: 'Puma' },
-  { src: '/brand/customers/swiggy.png', alt: 'Swiggy' },
-  { src: '/brand/customers/flipkart.svg', alt: 'Flipkart' },
-  { src: '/brand/customers/sn_aboitiz.webp', alt: 'SN Aboitiz' },
+  { src: asset('/brand/customers/acko.svg'), alt: 'Acko' },
+  { src: asset('/brand/customers/caratlane.svg'), alt: 'CaratLane' },
+  { src: asset('/brand/customers/puma.webp'), alt: 'Puma' },
+  { src: asset('/brand/customers/swiggy.png'), alt: 'Swiggy' },
+  { src: asset('/brand/customers/flipkart.svg'), alt: 'Flipkart' },
+  { src: asset('/brand/customers/sn_aboitiz.webp'), alt: 'SN Aboitiz' },
 ];
 
 /**

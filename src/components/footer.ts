@@ -1,3 +1,5 @@
+import { asset } from '../asset';
+
 /**
  * Footer chrome.
  *
@@ -20,7 +22,7 @@ export function mountFooter(root: HTMLElement): HTMLElement {
 
   const logo = document.createElement('img');
   logo.className = 'kf-footer__logo';
-  logo.src = '/brand/kissflow-horizontal-white.png';
+  logo.src = asset('/brand/kissflow-horizontal-white.png');
   logo.alt = 'Kissflow';
   logo.width = 148;
   logo.height = 36;

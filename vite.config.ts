@@ -1,6 +1,12 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+// Project GitHub Pages serve under /<repo>/. Base is applied at build time only,
+// so the dev server stays at the clean root. Override the repo slug with
+// GH_PAGES_BASE if the repository is renamed.
+const REPO_BASE = process.env.GH_PAGES_BASE ?? '/kissflow-agentic-os/';
+
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? REPO_BASE : '/',
   build: {
     target: 'es2020',
     // three.js and gsap are large vendor libs; split them into their own
@@ -18,4 +24,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));
