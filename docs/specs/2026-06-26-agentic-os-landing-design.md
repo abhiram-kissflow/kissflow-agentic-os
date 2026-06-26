@@ -18,9 +18,10 @@ category (Agentic OS) and showcases a signature fluttering 3D butterfly.
 
 ### Why this design (context)
 A knowledge-graph analysis of the current kissflow.com surfaced one dominant blind spot:
-**category confusion** — the site calls itself four different things (low-code, no-code, app
-development, procurement). This design turns that flaw into the hero metaphor: the butterfly's
-**four wings = four capabilities of one operating system**. Spine line: *"Four wings. One flight."*
+**category confusion** — the site fractured into four competing positionings instead of one. This
+design turns that flaw into the hero metaphor: the butterfly's **four wings = four capabilities of
+one operating system**. Spine line: *"Four wings. One flight."* The Agentic OS rebrand retires the
+old low-code/no-code framing entirely — it is never used as a category or label anywhere on the page.
 
 ---
 
@@ -32,10 +33,10 @@ development, procurement). This design turns that flaw into the hero metaphor: t
 2. **The old way** — four disconnected fragments drift apart (visual nod to today's fragmentation). Tension.
 3. **Metamorphosis** — scroll fuses the fragments into the butterfly. *"Four wings. One flight."*
 4. **The four wings (interactive)** — hover/tap each wing; camera focuses, copy reveals:
-   - Magenta — **Build** (enterprise apps, no/low-code)
-   - Blue — **Automate** (processes & workflows)
-   - Orange — **Agents** (AI that acts)
-   - Green — **Govern** (enterprise-grade security)
+   - Magenta — **Build** (enterprise-grade applications)
+   - Blue — **Automate** (processes & operations)
+   - Orange — **Agents** (AI agents that act)
+   - Green — **Govern** (security & control)
 5. **Proof** — animated counters: 50+ Fortune 500 · 160+ countries · 1M+ users. Customer logos.
 6. **Agentic, but governed** — trust beat: agents that act *securely*. Answers the enterprise objection.
 7. **Take flight (CTA)** — butterfly lifts off → book-a-demo link.
