@@ -4,8 +4,8 @@
  * Brand law: the second and final place the locked Kissflow lockup may appear.
  * The horizontal white lockup is used as a plain `<img>` at its native aspect
  * ratio — never recolored, rotated, or distorted. The category line repeats the
- * positioning ("the Agentic OS for Business"); the copy never uses "low-code" or
- * "no-code".
+ * positioning ("the Agentic OS for Business"); the copy avoids the prohibited
+ * build-tier labels enforced by copy.test.ts.
  */
 export function mountFooter(root: HTMLElement): HTMLElement {
   const footer = document.createElement('footer');

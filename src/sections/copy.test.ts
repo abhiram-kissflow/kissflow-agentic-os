@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { COPY } from './copy';
 const all = JSON.stringify(COPY).toLowerCase();
 describe('copy rules', () => {
-  it('never says low-code or no-code', () => {
+  it('never uses the prohibited build-tier labels', () => {
     expect(all).not.toMatch(/low.?code|no.?code/);
   });
   it('uses the Agentic OS category and capital-K Kissflow', () => {

@@ -5,7 +5,8 @@
  * tight, vigorous, and concrete — short sentences, active voice, no hedging.
  *
  * Brand law enforced by `copy.test.ts`:
- *  - never the words "low-code" or "no-code";
+ *  - never the two prohibited build-tier labels (the test regex is the source
+ *    of truth for which words are banned);
  *  - the category is "Agentic OS for Business";
  *  - the brand name is always "Kissflow" (capital K, never all-caps).
  */
