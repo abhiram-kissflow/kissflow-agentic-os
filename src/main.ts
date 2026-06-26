@@ -9,6 +9,8 @@ import { canRenderWebGL, prefersReducedMotion } from './capability';
 import { createRenderer } from './renderer';
 import { Preloader } from './preloader';
 import { RibbonController } from './ribbons/controller';
+import { mountSections } from './sections';
+import { initTimeline } from './scroll/timeline';
 
 document.body.style.background = BRAND.black;
 
@@ -74,6 +76,13 @@ function bootWebGL(stage: HTMLCanvasElement): void {
 
   const controller = new RibbonController();
   scene.add(controller.mesh);
+
+  // Mount the seven scrolling DOM beats over the stage and bind them to the
+  // ribbon hero via GSAP ScrollTrigger (scroll → spread, wing focus, lift-off).
+  if (app) {
+    const refs = mountSections(app);
+    initTimeline(controller, refs);
+  }
 
   // Post-processing: render the scene, then bloom the additive ribbon glow.
   const composer = new EffectComposer(renderer);
