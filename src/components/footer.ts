@@ -11,6 +11,7 @@ import { asset } from '../asset';
  */
 export function mountFooter(root: HTMLElement): HTMLElement {
   const footer = document.createElement('footer');
+  footer.id = 'site-footer';
   footer.className = 'kf-footer';
   footer.setAttribute('aria-label', 'Footer');
 

@@ -26,7 +26,7 @@ export function mountCta(): HTMLElement {
 
   const button = document.createElement('a');
   button.className = 'kf-cta-button kf-cta-button--primary';
-  button.href = '/demo';
+  button.href = '#site-footer';
   button.dataset.action = 'book-demo';
   button.textContent = `${COPY.cta.button} — ${COPY.cta.action}`;
   magnetize(button, { strength: 0.5, radius: 160 });
