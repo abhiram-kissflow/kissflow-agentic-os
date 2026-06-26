@@ -93,9 +93,9 @@ function bootWebGL(stage: HTMLCanvasElement): void {
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
     new THREE.Vector2(globalThis.innerWidth, globalThis.innerHeight),
-    0.38, // strength — gentle glow on the ribbon cores, not a wash
-    0.45, // radius
-    0.5, // threshold — only the brightest cores bloom, keeps copy readable
+    0.22, // strength — restrained glow on the ribbon cores, copy stays readable
+    0.4, // radius
+    0.6, // threshold — only the very brightest cores bloom
   );
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
