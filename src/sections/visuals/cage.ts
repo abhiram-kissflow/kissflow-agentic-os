@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { BRAND, hexToVec3 } from '../../brand/tokens';
 import { prefersReducedMotion } from '../../capability';
+import { softPointTexture } from './point-texture';
 import type { VisualOptions, VisualHandle } from './globe';
 
 const PARTICLE_COUNT = 320;
@@ -64,7 +65,8 @@ export function mountCage(el: HTMLElement, _opts: VisualOptions = {}): VisualHan
 
   // Two-tone agents: a magenta core glow over orange points via additive size.
   const mat = new THREE.PointsMaterial({
-    size: 0.07,
+    size: 0.1,
+    map: softPointTexture(),
     sizeAttenuation: true,
     transparent: true,
     opacity: 0.95,
@@ -77,10 +79,11 @@ export function mountCage(el: HTMLElement, _opts: VisualOptions = {}): VisualHan
 
   // A faint magenta inner haze so the swarm reads as energy, not confetti.
   const hazeMat = new THREE.PointsMaterial({
-    size: 0.22,
+    size: 0.3,
+    map: softPointTexture(),
     sizeAttenuation: true,
     transparent: true,
-    opacity: 0.1,
+    opacity: 0.12,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     color: new THREE.Color(...hexToVec3(BRAND.magenta)),

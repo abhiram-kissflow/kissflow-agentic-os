@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { BRAND } from '../../brand/tokens';
 import { prefersReducedMotion } from '../../capability';
+import { softPointTexture } from './point-texture';
 import type { VisualOptions, VisualHandle } from './globe';
 
 const NODE_COUNT = 160;
@@ -49,7 +50,8 @@ export function mountConstellation(el: HTMLElement, _opts: VisualOptions = {}): 
   nodeGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   const nodeMat = new THREE.PointsMaterial({
     color: new THREE.Color(BRAND.blue),
-    size: 0.05,
+    size: 0.07,
+    map: softPointTexture(),
     sizeAttenuation: true,
     transparent: true,
     opacity: 0.9,
@@ -92,7 +94,8 @@ export function mountConstellation(el: HTMLElement, _opts: VisualOptions = {}): 
       pulseGeo,
       new THREE.PointsMaterial({
         color: new THREE.Color(pulseColors[i % pulseColors.length]),
-        size: 0.11,
+        size: 0.16,
+        map: softPointTexture(),
         sizeAttenuation: true,
         transparent: true,
         blending: THREE.AdditiveBlending,
