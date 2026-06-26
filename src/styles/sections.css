@@ -352,6 +352,9 @@
   height: 100%;
   object-fit: cover;
   border-radius: 1rem;
+  /* Art is rendered on pure black — screen-blend drops the black out so it
+     composites as light over the live ribbon stage (no transparent PNG needed). */
+  mix-blend-mode: screen;
 }
 
 .kf-visual__static {
@@ -573,9 +576,10 @@
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: contain;
-  opacity: 0.3;
+  opacity: 0.42;
   pointer-events: none;
   z-index: 0;
+  mix-blend-mode: screen;
   -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 80%);
   mask-image: radial-gradient(ellipse at center, #000 55%, transparent 80%);
 }
